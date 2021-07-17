@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+<header th:insert="fragments/general.html::header"></header>
+<br>
+<a href="/book" th:text="#{home.menu.book.page}"> </a>|
+<a href="/user" th:text="#{home.menu.user.page}"> </a>|
+<a href="/about" th:text="#{home.menu.about.page}"> </a>|
+
+</body>
+</html>

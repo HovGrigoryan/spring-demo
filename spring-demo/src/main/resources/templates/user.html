@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>user Page</title>
+    <link href="/css/style.css" rel="stylesheet"/>
+
+</head>
+<body>
+<header th:insert="fragments/general.html::header"></header>
+
+<h3 style="color: #008000" th:text="${msg}"></h3>
+<h3>Add User:</h3>
+<form action="/user/add" method="post" enctype="multipart/form-data">
+    <input type="text" name="name" placeholder="Please input name"/><br>
+<!--    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"> Name Error</span>-->
+    <input type="text" name="surname" placeholder="Please input surname"/><br>
+    <input type="email" name="username" placeholder="Please input email"/><br>
+    <input type="password" name="password" placeholder="Please input password"/><br>
+    <input type="password" name="confirmPassword" placeholder="Please input password once again"/><br>
+    <select name="role">
+        <option value="USER">user</option>
+        <option value="ADMIN">admin</option>
+    </select>
+    <input type="file" name="image"/><br>
+    <input type="submit" value="add">
+</form>
+
+Users:
+<table id="users" border="1">
+    <thead>
+    <tr>
+        <td>Picture</td>
+        <td>User Name</td>
+        <td>User Surname</td>
+        <td>Username</td>
+        <td>Role</td>
+        <td>Active</td>
+        <td>Action</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user:${users}">
+        <td><img th:src="@{/image(name=${user.profilePic})}" width="20"
+                 th:if="${user.profilePic!=null && user.profilePic.length()!=0}"/></td>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.surname}"></td>
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.role.name()}"></td>
+        <td th:text="${user.active}"></td>
+        <td><a th:href="@{/user/delete(id=${user.id})}">delete</a>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
